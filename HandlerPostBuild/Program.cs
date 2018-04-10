@@ -11,11 +11,13 @@ namespace HandlerPostBuild
     {
         static void Main(string[] args)
         {
-            foreach (string dirPath in Directory.GetDirectories(@"C:\Dropbox\Oblivion Project\Oblivion Pipeline\7 0 Mod Production Repo - Troy"))
+            foreach (string dirPath in Directory.GetDirectories(Properties.Settings.Default.DestinationDir))
             {
-                if (dirPath.Contains("Oblivion - "))
+                if (dirPath.Contains(Properties.Settings.Default.Filter))
                 {
-                    CopyFolderContents(@"C:\TMinus1010\Projects\Coding\C#\GitCopyMaster\GitCopyMaster\bin\Debug", dirPath + @"\.git\hooks", ".exe.config");
+                    var curDir = new DirectoryInfo(".");
+                    string sourcePath = curDir.FullName;
+                    CopyFolderContents(sourcePath + @"\..\..\..\GitCopyMaster\bin\Debug", dirPath + @"\.git\hooks", Properties.Settings.Default.Exclude);
                 }
             }
         }
@@ -26,15 +28,15 @@ namespace HandlerPostBuild
         {
             // Open
             System.Console.WriteLine($"GitCopyMaster/CopyFolderContents/Open. sourcePath:{sourcePath} destPath:{destPath}");
-            // Create main destPath folder
+            // Create main directory
             Directory.CreateDirectory(destPath);
-            // Copy all folders
+            // Copy directories
             foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
             {
                 System.Console.WriteLine($"GitCopyMaster/CopyFolderContents/Creating Directory: {dirPath.Replace(sourcePath, destPath)}");
                 Directory.CreateDirectory(dirPath.Replace(sourcePath, destPath));
             }
-            // Copy all files
+            // Copy files
             foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
             {
                 System.Console.WriteLine($"GitCopyMaster/CopyFolderContents/Copying File from: {newPath} to: {newPath.Replace(sourcePath, destPath)}");
@@ -46,16 +48,16 @@ namespace HandlerPostBuild
         {
             // Open
             System.Console.WriteLine($"GitCopyMaster/CopyFolderContents/Open. sourcePath:{sourcePath} destPath:{destPath}");
-            // Create main destPath folder
+            // Create main directory
             Directory.CreateDirectory(destPath);
-            // Copy all folders
+            // Copy directories
             foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
             {
                 if (dirPath.Contains(exclude)) continue;
                 System.Console.WriteLine($"GitCopyMaster/CopyFolderContents/Creating Directory: {dirPath.Replace(sourcePath, destPath)}");
                 Directory.CreateDirectory(dirPath.Replace(sourcePath, destPath));
             }
-            // Copy all files
+            // Copy files
             foreach (string filePath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
             {
                 if (filePath.Contains(exclude)) continue;

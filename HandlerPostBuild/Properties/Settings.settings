@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="HandlerPostBuild.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Exclude" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.exe.config</Value>
+    </Setting>
+    <Setting Name="DestinationDir" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Dropbox\Oblivion Project\Oblivion Pipeline\7 0 Mod Production Repo - Troy</Value>
+    </Setting>
+    <Setting Name="Filter" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Oblivion - </Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
