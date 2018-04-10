@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{81833CAE-174A-4566-A717-CA245D7A302C}</ProjectGuid>
+    <ProjectGuid>{DE0BEAB0-93FB-4C71-859E-2EB8F381700E}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CopyFilesPostBuild</RootNamespace>
-    <AssemblyName>CopyFilesPostBuild</AssemblyName>
+    <RootNamespace>HandlerPostBuild</RootNamespace>
+    <AssemblyName>HandlerPostBuild</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

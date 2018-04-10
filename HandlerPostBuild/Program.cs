@@ -11,7 +11,13 @@ namespace HandlerPostBuild
     {
         static void Main(string[] args)
         {
-            CopyFolderContents();
+            foreach (string dirPath in Directory.GetDirectories(@"C:\Dropbox\Oblivion Project\Oblivion Pipeline\7 0 Mod Production Repo - Troy"))
+            {
+                if (dirPath.Contains("Oblivion - "))
+                {
+                    CopyFolderContents(@"C:\TMinus1010\Projects\Coding\C#\GitCopyMaster\GitCopyMaster\bin\Debug", dirPath + @"\.git\hooks", ".exe.config");
+                }
+            }
         }
 
         // Functions
