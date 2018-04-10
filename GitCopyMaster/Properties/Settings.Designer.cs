@@ -26,9 +26,18 @@ namespace GitCopyMaster.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DestinationFolder {
+        public string FullDestinationFolder {
             get {
-                return ((string)(this["DestinationFolder"]));
+                return ((string)(this["FullDestinationFolder"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Releases")]
+        public string PartialDestinationFolder {
+            get {
+                return ((string)(this["PartialDestinationFolder"]));
             }
         }
     }
