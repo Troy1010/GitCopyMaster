@@ -34,7 +34,7 @@ namespace GitCopyMaster.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Releases")]
+        [global::System.Configuration.DefaultSettingValueAttribute("zz Releases")]
         public string PartialDestinationFolder {
             get {
                 return ((string)(this["PartialDestinationFolder"]));

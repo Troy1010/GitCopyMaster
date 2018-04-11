@@ -81,11 +81,13 @@ namespace GitCopyMaster
             }
             // if sourcePath is empty, don't continue
             System.Console.WriteLine("GitCopyMaster/RunLogic/Region for checking if source is empty..");
+            bool bEmpty = true;
             foreach (string filePath in Directory.GetFiles(sourcePath))
             {
                 if (filePath.Contains(".git")) continue;
-                return;
+                bEmpty = false;
             }
+            if (bEmpty) return;
             System.Console.WriteLine("GitCopyMaster/RunLogic/Not Empty. Continuing.");
             // Copy Folders with content
             System.Console.WriteLine("GitCopyMaster/RunLogic/Region for copying folders..");

@@ -6,7 +6,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="PartialDestinationFolder" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Releases</Value>
+      <Value Profile="(Default)">zz Releases</Value>
     </Setting>
   </Settings>
 </SettingsFile>

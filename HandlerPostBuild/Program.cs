@@ -26,22 +26,7 @@ namespace HandlerPostBuild
 
         public static void CopyFolderContents(string sourcePath, string destPath)
         {
-            // Open
-            System.Console.WriteLine($"GitCopyMaster/CopyFolderContents/Open. sourcePath:{sourcePath} destPath:{destPath}");
-            // Create main directory
-            Directory.CreateDirectory(destPath);
-            // Copy directories
-            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
-            {
-                System.Console.WriteLine($"GitCopyMaster/CopyFolderContents/Creating Directory: {dirPath.Replace(sourcePath, destPath)}");
-                Directory.CreateDirectory(dirPath.Replace(sourcePath, destPath));
-            }
-            // Copy files
-            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
-            {
-                System.Console.WriteLine($"GitCopyMaster/CopyFolderContents/Copying File from: {newPath} to: {newPath.Replace(sourcePath, destPath)}");
-                File.Copy(newPath, newPath.Replace(sourcePath, destPath), true);
-            }
+            CopyFolderContents(sourcePath, destPath, "");
         }
 
         public static void CopyFolderContents(string sourcePath, string destPath, string exclude)
@@ -53,14 +38,14 @@ namespace HandlerPostBuild
             // Copy directories
             foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
             {
-                if (dirPath.Contains(exclude)) continue;
+                if (exclude !="" && dirPath.Contains(exclude)) continue;
                 System.Console.WriteLine($"GitCopyMaster/CopyFolderContents/Creating Directory: {dirPath.Replace(sourcePath, destPath)}");
                 Directory.CreateDirectory(dirPath.Replace(sourcePath, destPath));
             }
             // Copy files
             foreach (string filePath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
             {
-                if (filePath.Contains(exclude)) continue;
+                if (exclude != "" && filePath.Contains(exclude)) continue;
                 System.Console.WriteLine($"GitCopyMaster/CopyFolderContents/Copying File from: {filePath} to: {filePath.Replace(sourcePath, destPath)}");
                 File.Copy(filePath, filePath.Replace(sourcePath, destPath), true);
             }
