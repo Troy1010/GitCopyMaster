@@ -13,16 +13,22 @@ namespace GitCopyMaster
     {
         static void Main(string[] args)
         {
+            System.Console.WriteLine("GitCopyMaster/Open");
             if (!HookTypeExt.TryGetHook(args[0], out HookType hookType))
             {
                 return;
             }
-            
+
             switch (hookType)
             {
                 case HookType.Post_Merge:
                 case HookType.Post_Checkout:
                 case HookType.Post_Commit:
+                    if (IsCurrentRepoDirty())
+                    {
+                        System.Console.WriteLine("GitCopyMaster/Repo was dirty. Exiting");
+                        return;
+                    }
                     RunLogic();
                     break;
                 default:
@@ -43,7 +49,7 @@ namespace GitCopyMaster
             // Filter
             if (BranchName != "master")
             {
-                System.Console.WriteLine($"GitCopyMaster/RunLogic/BranchName:{BranchName} is not master.");
+                System.Console.WriteLine($"GitCopyMaster/RunLogic/BranchName:{BranchName} is not master. Exiting");
                 return;
             }
             else
@@ -87,10 +93,15 @@ namespace GitCopyMaster
                 if (filePath.Contains(".git")) continue;
                 bEmpty = false;
             }
-            if (bEmpty) return;
+            if (bEmpty)
+            {
+                System.Console.WriteLine("GitCopyMaster/RunLogic/Empty. Exiting.");
+                return;
+            }
             System.Console.WriteLine("GitCopyMaster/RunLogic/Not Empty. Continuing.");
             // Copy Folders with content
             System.Console.WriteLine("GitCopyMaster/RunLogic/Region for copying folders..");
+            Directory.CreateDirectory(destPath);
             foreach (string dirPath in Directory.GetDirectories(sourcePath))
             {
                 DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
@@ -111,8 +122,16 @@ namespace GitCopyMaster
             System.Console.WriteLine("GitCopyMaster/RunLogic/End of region for copying files..");
         }
 
-
         // Functions
+        public static bool IsCurrentRepoDirty()
+        {
+            using (var repo = new Repository(Directory.GetCurrentDirectory()))
+            {
+                return repo.RetrieveStatus().IsDirty;
+            }
+        }
+
+
         public static void CopyFolderContents(string sourcePath, string destPath)
         {
             // Open
